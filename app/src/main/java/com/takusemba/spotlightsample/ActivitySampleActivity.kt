@@ -127,6 +127,15 @@ class ActivitySampleActivity : AppCompatActivity(R.layout.activity_activity_samp
           .setDuration(1000L)
           .setAnimation(DecelerateInterpolator(2f))
           .setOnSpotlightListener(object : OnSpotlightListener {
+            override fun onWillNavigate(index: Int) {
+              currentToast?.cancel()
+              currentToast = makeText(
+                this@ActivitySampleActivity,
+                "spotlight will navigate to $index",
+                LENGTH_SHORT
+              )
+            }
+
             override fun onStarted() {
               currentToast?.cancel()
               currentToast = makeText(
@@ -136,6 +145,15 @@ class ActivitySampleActivity : AppCompatActivity(R.layout.activity_activity_samp
               )
               currentToast?.show()
               startButton.isEnabled = false
+            }
+
+            override fun onDidNavigate(index: Int) {
+              currentToast?.cancel()
+              currentToast = makeText(
+                this@ActivitySampleActivity,
+                "spotlight navigated to $index",
+                LENGTH_SHORT
+              )
             }
 
             override fun onEnded() {

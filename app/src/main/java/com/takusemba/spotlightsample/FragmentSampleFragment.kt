@@ -5,6 +5,8 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
+import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.OnTargetListener
@@ -31,7 +33,7 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
           .setOnTargetListener(object : OnTargetListener {
             override fun onStarted() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "first target is started",
                   Toast.LENGTH_SHORT
@@ -41,7 +43,7 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
 
             override fun onEnded() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "first target is ended",
                   Toast.LENGTH_SHORT
@@ -63,7 +65,7 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
           .setOnTargetListener(object : OnTargetListener {
             override fun onStarted() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "second target is started",
                   Toast.LENGTH_SHORT
@@ -73,7 +75,7 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
 
             override fun onEnded() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "second target is ended",
                   Toast.LENGTH_SHORT
@@ -95,7 +97,7 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
           .setOnTargetListener(object : OnTargetListener {
             override fun onStarted() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "third target is started",
                   Toast.LENGTH_SHORT
@@ -105,7 +107,7 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
 
             override fun onEnded() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "third target is ended",
                   Toast.LENGTH_SHORT
@@ -124,9 +126,18 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
           .setDuration(1000L)
           .setAnimation(DecelerateInterpolator(2f))
           .setOnSpotlightListener(object : OnSpotlightListener {
+            override fun onWillNavigate(index: Int) {
+              currentToast?.cancel()
+              currentToast = makeText(
+                requireContext(),
+                "spotlight will navigate to $index",
+                LENGTH_SHORT
+              )
+            }
+
             override fun onStarted() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "spotlight is started",
                   Toast.LENGTH_SHORT
@@ -135,9 +146,18 @@ class FragmentSampleFragment : Fragment(R.layout.fragment_fragment_sample) {
               startButton.isEnabled = false
             }
 
+            override fun onDidNavigate(index: Int) {
+              currentToast?.cancel()
+              currentToast = makeText(
+                requireContext(),
+                "spotlight navigated to $index",
+                LENGTH_SHORT
+              )
+            }
+
             override fun onEnded() {
               currentToast?.cancel()
-              currentToast = Toast.makeText(
+              currentToast = makeText(
                   requireContext(),
                   "spotlight is ended",
                   Toast.LENGTH_SHORT
