@@ -22,4 +22,4 @@ dependencies {
   implementation deps.androidx.appcompat
 }
 
-apply from: "../publish.gradle"
+//apply from: "../publish.gradle"
