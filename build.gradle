@@ -12,28 +12,27 @@ buildscript {
       licenseName: "The Apache Software License, Version 2.0",
       licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.txt",
 
-      compileSdkVersion: 30,
-      minSdkVersion: 14,
-      targetSdkVersion: 30,
+      compileSdkVersion: 34,
+      minSdkVersion: 21,
+      targetSdkVersion: 34,
   ]
   ext.versions = [
-      kotlin: '1.4.31',
+      kotlin: '2.0.20',
   ]
   ext.deps = [
-      androidPlugin: "com.android.tools.build:gradle:4.1.2",
+      androidPlugin: "com.android.tools.build:gradle:8.5.2",
       kotlin: [
-          plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
-          stdlib: "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
+          plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
       ],
       androidx: [
-          appcompat: "androidx.appcompat:appcompat:1.2.0",
-          constraintLayout: "androidx.constraintlayout:constraintlayout:2.0.1",
+          appcompat: "androidx.appcompat:appcompat:1.7.0",
+          constraintLayout: "androidx.constraintlayout:constraintlayout:2.1.4",
       ],
-      leakcanary: 'com.squareup.leakcanary:leakcanary-android:2.4'
+      leakcanary: 'com.squareup.leakcanary:leakcanary-android:2.14'
   ]
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
   dependencies {
     classpath deps.androidPlugin
@@ -44,7 +43,7 @@ buildscript {
 allprojects {
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
 }
 
