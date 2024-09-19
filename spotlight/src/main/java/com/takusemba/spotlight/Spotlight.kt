@@ -95,6 +95,7 @@ class Spotlight private constructor(
     if (currentIndex == NO_POSITION) {
       val target = targets[index]
       currentIndex = index
+      spotlightListener?.onWillNavigate(index)
       spotlight.startTarget(target)
       target.listener?.onStarted()
     } else {
@@ -107,6 +108,7 @@ class Spotlight private constructor(
             val target = targets[index]
             currentIndex = index
             spotlight.startTarget(target)
+            spotlightListener?.onDidNavigate(index)
             target.listener?.onStarted()
           } else {
             finishSpotlight()
