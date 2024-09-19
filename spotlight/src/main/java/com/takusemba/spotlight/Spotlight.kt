@@ -97,6 +97,7 @@ class Spotlight private constructor(
       currentIndex = index
       spotlightListener?.onWillNavigate(index)
       spotlight.startTarget(target)
+      spotlightListener?.onDidNavigate(index)
       target.listener?.onStarted()
     } else {
       spotlight.finishTarget(object : AnimatorListenerAdapter() {
@@ -107,6 +108,7 @@ class Spotlight private constructor(
           if (index < targets.size) {
             val target = targets[index]
             currentIndex = index
+            spotlightListener?.onWillNavigate(index)
             spotlight.startTarget(target)
             spotlightListener?.onDidNavigate(index)
             target.listener?.onStarted()
